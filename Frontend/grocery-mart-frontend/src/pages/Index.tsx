@@ -162,6 +162,11 @@ const Index = () => {
 
   }
 
+  const handleOnCartClick = ()=>{
+    setShowCart(true);
+    setShowOrderHistory(false);
+  }
+
   const handleOrderPlaced = async (deliveryOption:DeliveryOption,formData: {
     firstName: string;
     lastName: string;
@@ -191,7 +196,7 @@ const Index = () => {
         <Header
           user={user}
           cartItemsCount={getTotalItems()}
-          onCartClick={() => setShowCart(true)}
+          onCartClick={handleOnCartClick}
           onLoginClick={() => setShowAuthModal(true)}
           onLogout={handleLogout}
           onOrderHistoryClick={() => setShowOrderHistory(true)}
