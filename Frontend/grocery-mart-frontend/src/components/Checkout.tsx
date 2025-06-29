@@ -119,7 +119,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <Label htmlFor="lastName">Last Name</Label>
                   <Input
                       id="lastName"
-                      name="lasttName"
+                      name="lastName"
                       placeholder="Doe"
                       onChange={(e)=>setFormData({ ...formData, [e.target.name]: e.target.value })}
                   />

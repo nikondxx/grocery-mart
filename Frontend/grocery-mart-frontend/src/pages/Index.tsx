@@ -174,20 +174,30 @@ const Index = () => {
     city: string;
     zipCode: string;
   }, discountCode:string,discountAmount:number,subTotal:number) => {
-
+    if (!formData.address || !formData.city || !formData.zipCode || !formData.lastName || !formData.firstName ){
+      alert("Address Section cannot have empty values!");
+      return;
+    }
     const newOrder: Order = {
       id: null,
       items: [...cartItems],
       totalPrice: subTotal,
       deliveryOption: deliveryOption,
       createdAt: new Date(),
-      address: formData.firstName + " " + formData.lastName + " ," + formData.address + " ," + formData.city + " ," + formData.zipCode,
+      address: formData.firstName + "#" + formData.lastName + "#" + formData.address + "#" + formData.city + "#" + formData.zipCode,
     };
     const savedOrder = await ApiService.saveOrder({...newOrder,userId:user.id,discountCode:discountCode,discountAmount:discountAmount});
-    setOrders([savedOrder, ...orders]);
-    setCartItems([]);
-    setShowCheckout(false);
-    alert('Order placed successfully!');
+    if (savedOrder){
+      setOrders([savedOrder, ...orders]);
+      setCartItems([]);
+      setShowCheckout(false);
+      alert('Order placed successfully!');
+    }
+    else{
+      alert("Order placement failed")
+    }
+
+
   };
 
   if (showOrderHistory) {

@@ -33,6 +33,14 @@ public class GroceryOrderService {
 
     @Transactional
     public GroceryOrder save(OrderDTO orderDTO) {
+        if (orderDTO.getAddress() != null) {
+            String[] address = orderDTO.getAddress().split("#");
+            for (String s : address) {
+                if (s == null || s.isEmpty()) {
+                    return null;
+                }
+            }
+        }
         GroceryOrder groceryOrder = new GroceryOrder();
         List<OrderItem> orderItems = new ArrayList<>();
         GroceryUser user = userRepository.findById(orderDTO.getUserId()).orElse(null);
